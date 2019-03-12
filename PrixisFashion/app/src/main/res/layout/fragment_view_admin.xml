@@ -1,0 +1,43 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="2"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        android:layout_weight="0.3"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin Panel / View Admins"
+            android:textSize="22sp"
+            android:textColor="#ffa900"
+            android:fontFamily="@font/acme"
+            android:layout_gravity="center"
+            />
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="10dp"
+        android:layout_weight="1.8"
+        >
+
+        <ListView
+            android:id="@+id/lst_vw_admins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ></ListView>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

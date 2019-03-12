@@ -1,0 +1,14 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view_profile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:scrollbars="vertical"
+        android:background="@drawable/splashgradient"
+        ></android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

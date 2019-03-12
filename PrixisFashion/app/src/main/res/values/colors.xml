@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffa900</color>
+    <color name="colorPrimaryDark">#fcb834</color>
+    <color name="colorAccent">#FBB732</color>
+    <color name="colorFrameLayOuts">#FFF</color>
+    <color name="colorRecyclerText">#000</color>
+    <color name="selectorColor">#0097A7</color>
+    <color name="textColor">#FFF</color>
+    <color name="TotalStudentsCardColor">#FF9800</color>
+    <color name="ActiveStudentsColor">#2E7D32</color>
+    <color name="SuccessAlert">#2E7D32</color>
+    <color name="TeacherColor">#E53935</color>
+    <color name="ErrorColor">#E53935</color>
+    <color name="Accounts_drawer_backGroundColor">#FFF</color>
+    <color name="HyperLinkColor">#3949AB</color>
+    <color name="StylerBg">#E0E0E0</color>
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
+
+
+
+    <color name="backgroundcolor">#fcfcfc</color>
+    <color name="lightgray">#ededed</color>
+    <color name="deeppurple">#7c4dff</color>
+    <color name="yello">#ffb300</color>
+    <color name="green">#00bfa5</color>
+    <color name="darkblue">#23283a</color>
+    <color name="testcolorblue">#152b38</color>
+    <color name="pink">#fe104d</color>
+
+    <color name="black_overlay">#66000000</color>
+
+</resources>

@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@drawable/navigation_drawer_color"
+        android:id="@+id/home_dbord_menu"
+        android:elevation="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <LinearLayout
+            android:id="@+id/dasboard_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_marginEnd="6dp"
+                android:src="@drawable/dashboard"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dashboard"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
+    <!--frame for the student and its subLayout layouts -->
+
+
+    <!--layouts for the Student layouts -->
+
+    <!--the menus to show on clicking the item "Teacher"-->
+    <FrameLayout
+        android:id="@+id/order_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/navigation_drawer_color"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="10dp"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_marginEnd="6dp"
+                android:src="@drawable/orders"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View Orders"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
+    <!--the menus to show on clicking the item "Student"-->
+    <LinearLayout
+        android:id="@+id/order_sub_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/new_order_sub_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Orders"
+            android:textColor="@color/selectorColor"
+            android:textSize="16sp"
+            android:layout_margin="@dimen/navigationDrawersubMenuGap"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/navigationDrawersubMenuGap"
+            android:text="In Progress Orders"
+            android:clickable="true"
+            android:id="@+id/inprogress_sub_tv"
+            android:textColor="@color/selectorColor"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shipped Order"
+            android:textColor="@color/selectorColor"
+            android:id="@+id/shipped_sub_tv"
+            android:textSize="16sp"
+            android:layout_margin="@dimen/navigationDrawersubMenuGap"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/product_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/navigation_drawer_color"
+        android:elevation="10dp"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_marginEnd="6dp"
+                android:src="@drawable/productssmall"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Products"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
+    <!--frame for the parents or guaardian layout layouts -->
+    <!--the menus to show on clicking the item "Student"-->
+    <LinearLayout
+        android:id="@+id/product_sub_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Product"
+            android:id="@+id/add_pro_sub_tv"
+            android:textColor="@color/selectorColor"
+            android:textSize="16sp"
+            android:layout_margin="@dimen/navigationDrawersubMenuGap"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Products"
+            android:id="@+id/viw_pro_sub_tv"
+            android:textColor="@color/selectorColor"
+            android:textSize="16sp"
+            android:layout_margin="@dimen/navigationDrawersubMenuGap"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+
+    <FrameLayout
+        android:id="@+id/categories_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/navigation_drawer_color"
+        android:elevation="10dp"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_marginEnd="6dp"
+                android:src="@drawable/categoriessmall"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Categories"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/categories_sub_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/add_cat_sub_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Category"
+            android:textColor="@color/selectorColor"
+            android:textSize="16sp"
+            android:layout_margin="@dimen/navigationDrawersubMenuGap"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/view_cat_sub_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Categories"
+            android:textColor="@color/selectorColor"
+            android:textSize="16sp"
+            android:layout_margin="@dimen/navigationDrawersubMenuGap"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!--Daily Attendence layouts -->
+    <FrameLayout
+        android:id="@+id/customer_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/navigation_drawer_color"
+        android:elevation="10dp"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_marginEnd="6dp"
+                android:src="@drawable/customerssmall"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!--the hidden submenu for the daily AttendenceOption-->
+
+    <LinearLayout
+        android:id="@+id/customer_sub_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Customers"
+            android:id="@+id/view_customer_sub_tv"
+            android:textColor="@color/selectorColor"
+            android:textSize="14sp"
+            android:layout_margin="@dimen/navigationDrawersubMenuGap"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+    <!--Examination Frame for the  layouts -->
+    <FrameLayout
+        android:id="@+id/admin_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/navigation_drawer_color"
+        android:elevation="10dp"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:src="@drawable/adminsmall"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
+    <!--the hidden submenu for the Examination Option-->
+    <LinearLayout
+        android:id="@+id/admin_subMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Admin"
+            android:layout_margin="@dimen/navigationDrawersubMenuGap"
+            android:textColor="@color/selectorColor"
+            android:textSize="14sp"
+            android:id="@+id/add_Admin_sub_tv"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Admins"
+            android:textColor="@color/selectorColor"
+            android:textSize="14sp"
+            android:id="@+id/view_admin_sub_tv"
+            android:layout_margin="@dimen/navigationDrawersubMenuGap"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/contact_us_menu"
+        android:background="@drawable/navigation_drawer_color"
+        android:elevation="10dp"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_marginEnd="6dp"
+                android:src="@drawable/accountssmall"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accounts"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>
