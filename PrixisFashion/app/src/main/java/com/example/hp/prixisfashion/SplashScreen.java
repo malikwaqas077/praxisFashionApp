@@ -7,14 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.animation.Animator;
-import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
 import android.widget.ImageView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.example.hp.prixisfashion.Cusmoter.CustomerNavDrawerActivity;
 
 import me.wangyuwei.particleview.ParticleView;
 
@@ -25,9 +24,9 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        particleView=(ParticleView)findViewById(R.id.particleView);
+        particleView=findViewById(R.id.particleView);
         image=(ImageView)findViewById(R.id.image);
-        final Boolean session=getSharedPreferences("PREFERENCE",MODE_PRIVATE).getBoolean("session",false);
+//        final Boolean session=getSharedPreferences("PREFERENCE",MODE_PRIVATE).getBoolean("session",false);
 
         YoYo.with(Techniques.BounceIn).duration(8000).withListener(new Animator.AnimatorListener() {
             @Override
@@ -59,7 +58,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
 
-                startActivity(new Intent(SplashScreen.this,LoginActivity.class));
+                startActivity(new Intent(SplashScreen.this, CustomerNavDrawerActivity.class));
                 finish();
             }
 

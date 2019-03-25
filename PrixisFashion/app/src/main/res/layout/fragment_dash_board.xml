@@ -18,6 +18,7 @@
         tools:showIn="@layout/app_bar_customer_nav_drawer">
         <ViewFlipper
             android:id="@+id/simpleViewFlipper"
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="200dp">
         </ViewFlipper>

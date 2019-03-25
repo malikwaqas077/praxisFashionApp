@@ -56,7 +56,9 @@ public class AddProductFragment extends Fragment {
 
     StorageReference profilePicRef;
 
-    private String mStrSpinnerValue, mStrProdTitle, mStrProdPrice, mStrProdKeywords, mStrProdDetails;
+    private String mStrSpinnerValue, mStrProdTitle, mStrProdPrice, mStrProdDetails;
+    
+    int mProductQuantity;
 
     private StorageReference mProfilePicStorageReference;
     private static final int RC_PHOTO_PICKER = 1;
@@ -121,7 +123,8 @@ public class AddProductFragment extends Fragment {
                 mStrProdTitle = mEdtTxtProdTitle.getText().toString();
                 mStrSpinnerValue = mSpinnerCategories.getSelectedItem().toString();
                 mStrProdPrice = mEdtTxtProdPrice.getText().toString();
-                mStrProdKeywords = mEdtTxtProdKeywords.getText().toString();
+                String mStrQnty = mEdtTxtProdKeywords.getText().toString();
+                mProductQuantity=Integer.parseInt(mStrQnty);
                 mStrProdDetails = mEdtTxtProdDetails.getText().toString();
 
                 if (mStrProdTitle.isEmpty()) {
@@ -130,7 +133,7 @@ public class AddProductFragment extends Fragment {
                     Snackbar.make(view, "Please Select Category First", Snackbar.LENGTH_LONG).show();
                 } else if (mStrProdPrice.isEmpty()) {
                     mEdtTxtProdPrice.setError("Please Fill This Filed");
-                } else if (mStrProdKeywords.isEmpty()) {
+                } else if (mStrQnty.isEmpty()) {
                     mEdtTxtProdKeywords.setError("Please Fill This Filed");
                 } else if (mStrProdDetails.isEmpty()) {
                     mEdtTxtProdDetails.setError("Please Fill This Filed");
@@ -215,7 +218,7 @@ public class AddProductFragment extends Fragment {
     public void uploadProduct(String ImageUrl){
         final View view=getView();
         databaseReference = FirebaseDatabase.getInstance().getReference("Products");
-        adminProductModel = new AdminProductModel(mStrProdTitle, mStrSpinnerValue, mStrProdPrice, mStrProdKeywords, mStrProdDetails, ImageUrl);
+        adminProductModel = new AdminProductModel(mStrProdTitle, mStrSpinnerValue, mStrProdPrice, mProductQuantity, mStrProdDetails, ImageUrl, false);
         databaseReference.push().setValue(adminProductModel).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

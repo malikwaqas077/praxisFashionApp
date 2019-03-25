@@ -1,18 +1,13 @@
 package com.example.hp.prixisfashion.Cusmoter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,43 +16,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import com.bumptech.glide.Glide;
-import com.example.hp.prixisfashion.Admin.product.CatagoriesFragment;
-import com.example.hp.prixisfashion.Cusmoter.Fragments.Adapters.productAdapter;
+import com.example.hp.prixisfashion.CartActivity;
+import com.example.hp.prixisfashion.Adapters.productAdapter;
 import com.example.hp.prixisfashion.Cusmoter.Fragments.CustomerCatagoriesFragment;
+import com.example.hp.prixisfashion.Cusmoter.Fragments.CustomerSignupFragment;
 import com.example.hp.prixisfashion.Cusmoter.Fragments.DashBoardFragment;
 import com.example.hp.prixisfashion.Cusmoter.Fragments.MyCartFragment;
 import com.example.hp.prixisfashion.Cusmoter.Fragments.MyOrdersFragment;
 import com.example.hp.prixisfashion.Cusmoter.Fragments.MyProfileFragment;
 import com.example.hp.prixisfashion.Cusmoter.Fragments.SigninFragment;
-import com.example.hp.prixisfashion.Model.AdminModels.AdminProductModel;
 import com.example.hp.prixisfashion.R;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class CustomerNavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    FirebaseAuth auth;
 
-    int images[]={R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
+    int images[] = {R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
     private ViewFlipper simpleViewFlipper;
-    private ArrayList<String> mCategories=new ArrayList<>();
+    private ArrayList<String> mCategories = new ArrayList<>();
 
 
     DatabaseReference ProductReference;
@@ -65,12 +49,15 @@ public class CustomerNavDrawerActivity extends AppCompatActivity
     RecyclerView mProductRecycVw;
 
     Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_nav_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        auth = FirebaseAuth.getInstance();
+
 //        ProductReference= FirebaseDatabase.getInstance().getReference().child("Products");
 //
 //
@@ -105,7 +92,8 @@ public class CustomerNavDrawerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        DashBoardFragment fragment =new DashBoardFragment();
+
+        DashBoardFragment fragment = new DashBoardFragment();
 
         FragmentLoadinManagerWithBackStack(fragment);
 
@@ -136,9 +124,28 @@ public class CustomerNavDrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_btn_logout) {
+        if (id == R.id.action_logout) {
+            auth.signOut();
+            FragmentLoadinManagerWithBackStack(new DashBoardFragment());
+            Snackbar snackbar = Snackbar.make(getWindow().getDecorView().getRootView(), "Logged Out", Snackbar.LENGTH_INDEFINITE);
+            snackbar.show();
             return true;
+        } else if (id == R.id.optCart) {
+            if (null != auth.getCurrentUser()) {
+                startActivity(new Intent(CustomerNavDrawerActivity.this, CartActivity.class));
+
+            } else {
+                Snackbar snackbar = Snackbar.make(getWindow().getDecorView().getRootView(), "Please Login First", Snackbar.LENGTH_INDEFINITE);
+                snackbar.setAction("Login", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FragmentLoadinManagerWithBackStack(new SigninFragment());
+                    }
+                });
+                snackbar.show();
+            }
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -154,32 +161,82 @@ public class CustomerNavDrawerActivity extends AppCompatActivity
             FragmentLoadinManagerWithBackStack(dashBoardFragment);
 
         } else if (id == R.id.nav_catagory) {
-            CustomerCatagoriesFragment customerCatagoriesFragment =new CustomerCatagoriesFragment();
+            CustomerCatagoriesFragment customerCatagoriesFragment = new CustomerCatagoriesFragment();
             FragmentLoadinManagerWithBackStack(customerCatagoriesFragment);
 
             // Handle the camera action
         } else if (id == R.id.nav_orders) {
+            if (null != auth.getCurrentUser()) {
+                MyOrdersFragment myOrdersFragment = new MyOrdersFragment();
+                FragmentLoadinManagerWithBackStack(myOrdersFragment);
+            } else {
+                Snackbar snackbar = Snackbar.make(getWindow().getDecorView().getRootView(), "Please Login First", Snackbar.LENGTH_INDEFINITE);
+                snackbar.setAction("Login", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FragmentLoadinManagerWithBackStack(new SigninFragment());
+                    }
+                });
+                snackbar.show();
+            }
 
-            MyOrdersFragment myOrdersFragment=new MyOrdersFragment();
-            FragmentLoadinManagerWithBackStack(myOrdersFragment);
 
         } else if (id == R.id.nav_cart) {
+            if (null != auth.getCurrentUser()) {
+                startActivity(new Intent(CustomerNavDrawerActivity.this, CartActivity.class));
 
-            MyCartFragment myCartFragment=new MyCartFragment();
-            FragmentLoadinManagerWithBackStack(myCartFragment);
+            } else {
+                Snackbar snackbar = Snackbar.make(getWindow().getDecorView().getRootView(), "Please Login First", Snackbar.LENGTH_INDEFINITE);
+                snackbar.setAction("Login", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FragmentLoadinManagerWithBackStack(new SigninFragment());
+                    }
+                });
+                snackbar.show();
+
+            }
+//            MyCartFragment myCartFragment=new MyCartFragment();
+//            FragmentLoadinManagerWithBackStack(myCartFragment);
 
         } else if (id == R.id.nav_profile) {
 
-            MyProfileFragment myProfileFragment=new MyProfileFragment();
-            FragmentLoadinManagerWithBackStack(myProfileFragment);
+            if (null != auth.getCurrentUser()) {
+                MyProfileFragment myProfileFragment = new MyProfileFragment();
+                FragmentLoadinManagerWithBackStack(myProfileFragment);
+            } else {
+                Snackbar snackbar = Snackbar.make(getWindow().getDecorView().getRootView(), "Please Login First", Snackbar.LENGTH_INDEFINITE);
+                snackbar.setAction("Login", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FragmentLoadinManagerWithBackStack(new SigninFragment());
+                    }
+                });
+                snackbar.show();
+            }
+
 
         } else if (id == R.id.nav_signin) {
-            SigninFragment signinFragment=new SigninFragment();
-            FragmentLoadinManagerWithBackStack(signinFragment);
 
-        } else if (id == R.id.nav_send) {
+            if (null != auth.getCurrentUser()) {
+                SigninFragment signinFragment = new SigninFragment();
+                FragmentLoadinManagerWithBackStack(signinFragment);
+            } else {
+                Toast.makeText(getApplicationContext(), "you already are signed in", Toast.LENGTH_SHORT).show();
+            }
+
+
+        } else if (id == R.id.nav_signup) {
+
+            if (null != auth.getCurrentUser()) {
+                FragmentLoadinManagerWithBackStack(new CustomerSignupFragment());
+            } else {
+                Toast.makeText(getApplicationContext(), "Please Logout first to signup", Toast.LENGTH_SHORT).show();
+            }
+
 
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -196,7 +253,6 @@ public class CustomerNavDrawerActivity extends AppCompatActivity
 
 
     }
-
 
 
 //    @Override

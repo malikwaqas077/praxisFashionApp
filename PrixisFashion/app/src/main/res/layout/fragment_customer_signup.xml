@@ -1,0 +1,183 @@
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/newimg"
+    android:padding="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:elevation="5dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/txt_vw_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/acme"
+                    android:text="@string/admin_signup_register"
+                    android:textSize="25sp" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edt_txt_input_name"
+                    android:layout_below="@id/txt_vw_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="10"
+                    >
+
+                    <EditText
+                        android:id="@+id/edt_txt_as_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:autofillHints="Name"
+                        android:fontFamily="@font/open_sans"
+                        android:hint="@string/admin_name"
+                        android:inputType="text" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edt_txt_input_email"
+                    android:layout_below="@id/edt_txt_input_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true"
+                    >
+
+                    <EditText
+                        android:id="@+id/edt_txt_as_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:autofillHints="Email Address"
+                        android:fontFamily="@font/open_sans"
+                        android:hint="@string/admin_email"
+                        android:inputType="textWebEmailAddress" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edt_txt_input_password"
+                    android:layout_below="@id/edt_txt_input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true"
+                    app:passwordToggleEnabled="true"
+                    >
+
+                    <EditText
+                        android:id="@+id/edt_txt_as_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:autofillHints="Password"
+                        android:fontFamily="@font/open_sans"
+                        android:hint="@string/admin_password"
+                        android:inputType="textWebPassword" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edt_txt_input_rep_password"
+                    android:layout_below="@id/edt_txt_input_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true"
+                    app:passwordToggleEnabled="true"
+                    >
+
+                    <EditText
+                        android:id="@+id/edt_txt_as_rep_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:autofillHints="Password"
+                        android:fontFamily="@font/open_sans"
+                        android:hint="@string/admin_signup_repeat_password"
+                        android:inputType="textWebPassword" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edt_txt_input_phone"
+                    android:layout_below="@id/edt_txt_input_rep_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true"
+                    >
+
+                    <EditText
+                        android:id="@+id/edt_txt_as_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:autofillHints="Phone Number"
+                        android:fontFamily="@font/open_sans"
+                        android:hint="@string/admin_signup_phone_number"
+                        android:inputType="phone" />
+
+                </android.support.design.widget.TextInputLayout>
+                <Button
+                    android:id="@+id/select_iamge_btn"
+                    android:layout_below="@+id/edt_txt_input_phone"
+                    android:text="select image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_below="@+id/select_iamge_btn"
+                    android:id="@+id/selected_img_vw"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <Button
+                    android:id="@+id/btn_a_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/selected_img_vw"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:background="#373737"
+                    android:fontFamily="@font/acme"
+                    android:text="@string/admin_signup_register"
+                    android:textColor="#F9B642"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txt_vw_go_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btn_a_signup"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="30dp"
+                    android:text="@string/admin_back"
+                    android:textColor="#373737"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+</ScrollView>

@@ -43,6 +43,7 @@ public class CustomerCatagoriesFragment extends Fragment {
 
     int images[]={R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
     private ViewFlipper simpleViewFlipper;
+
     private ArrayList<String> mCategories=new ArrayList<>();
 
 
@@ -62,6 +63,7 @@ public class CustomerCatagoriesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_catagories2, container, false);
         ProductReference= FirebaseDatabase.getInstance().getReference().child("Categories");
+        getActivity().setTitle("Catagories");
 
 
         mProductRecycVw=view.findViewById(R.id.recycler_vw_catagory);
@@ -90,6 +92,8 @@ public class CustomerCatagoriesFragment extends Fragment {
                 //if you need three fix imageview in width
 
                 holder.postTitle.setText(model.getCategoryTitle());
+                Glide.with(getActivity().getApplicationContext()).load(model.getCategoryImgUrl()).into(holder.postImage);
+
 
             }
 
@@ -123,14 +127,11 @@ public class CustomerCatagoriesFragment extends Fragment {
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            postImage = (ImageView) itemView.findViewById(R.id.postImage);
+            postImage = (ImageView) itemView.findViewById(R.id.CatagoryImage);
             postTitle = (TextView) itemView.findViewById(R.id.postTitle);
             postDescription = (TextView) itemView.findViewById(R.id.postDescription);
             mAddToCartBtn=itemView.findViewById(R.id.add_to_cart_btn);
-            mItemCountLin=itemView.findViewById(R.id.count_item_lin_ly);
-            mPlusBtn=itemView.findViewById(R.id.PlusBtn);
-            mMinusBtn=itemView.findViewById(R.id.MinusBtn);
-            mTotalCount=itemView.findViewById(R.id.totalCount);
+
 
         }
     }

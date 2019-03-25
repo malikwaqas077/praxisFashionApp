@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.hp.prixisfashion.Model.AdminModels.AdminSignupModel;
+import com.example.hp.prixisfashion.Model.AdminModels.CustomerModel.CustomerSignupModel;
 import com.example.hp.prixisfashion.R;
 import com.example.hp.prixisfashion.SignupActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -106,40 +109,15 @@ public class SigninFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                kProgressHUD.dismiss();
+
                                 firebaseUser = auth.getCurrentUser();
                                 mStrUid = firebaseUser.getUid();
-                                databaseReferenceAdmin = FirebaseDatabase.getInstance().getReference().child("Admin").child(mStrUid).child("type");
-                                //databaseReferenceAdmin = rootReference.child(firebaseUser.getUid());
-                        //        databaseReferenceAdmin = rootReference.child("Admin").child(mStrUid);
-                                /*
-                                databaseReferenceAdmin.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-                                            AdminSignupModel adminSignupModel = dataSnapshot1.getValue(AdminSignupModel.class);
-                                            mStrIfAdmin = adminSignupModel.getType();
-                                        }
-                                    }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    }
-                                });
-                                */
-
-                             /*   ValueEventListener valueEventListener = new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        mStrIfAdmin = dataSnapshot.child("type").getValue(String.class);
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                };
-                                databaseReferenceAdmin.addListenerForSingleValueEvent(valueEventListener);
-                               */
-                                //Snackbar.make(view, mStrIfAdmin, Snackbar.LENGTH_LONG).show();
+                                databaseReferenceAdmin = FirebaseDatabase.getInstance().getReference().child("Customer").child(mStrUid);
+                                databaseReferenceAdmin = rootReference.child(firebaseUser.getUid());
+                                databaseReferenceAdmin = rootReference.child("Customer").child(mStrUid);
+                                FragmentLoadinManagerWithBackStack(new DashBoardFragment());
+                                Snackbar.make(view, "user loggedin successfully", Snackbar.LENGTH_LONG).show();
                                 kProgressHUD.dismiss();
                             }
                         }
@@ -149,6 +127,17 @@ public class SigninFragment extends Fragment {
         });
 
         return view;
+    }
+
+    public void FragmentLoadinManagerWithBackStack(Fragment fragment) {
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.customer_content_main, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+
     }
 
 }

@@ -1,10 +1,10 @@
 package com.example.hp.prixisfashion.Cusmoter.Fragments;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -20,10 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import com.airbnb.lottie.value.ScaleXY;
 import com.bumptech.glide.Glide;
-import com.example.hp.prixisfashion.Cusmoter.CustomerNavDrawerActivity;
-import com.example.hp.prixisfashion.Cusmoter.Fragments.Adapters.productAdapter;
+import com.example.hp.prixisfashion.CartListProducts;
+import com.example.hp.prixisfashion.Adapters.productAdapter;
 import com.example.hp.prixisfashion.Model.AdminModels.AdminProductModel;
 import com.example.hp.prixisfashion.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -89,14 +88,13 @@ public class DashBoardFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
         FirebaseRecyclerOptions<AdminProductModel> options=new FirebaseRecyclerOptions.Builder<AdminProductModel>()
                 .setQuery(ProductReference, AdminProductModel.class)
                 .build();
 
         FirebaseRecyclerAdapter<AdminProductModel, DashBoardFragment.ProductViewHolder> adapter=new FirebaseRecyclerAdapter<AdminProductModel, DashBoardFragment.ProductViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final DashBoardFragment.ProductViewHolder holder, int position, @NonNull AdminProductModel model) {
+            protected void onBindViewHolder(@NonNull final DashBoardFragment.ProductViewHolder holder, int position, @NonNull final AdminProductModel model) {
 
 
                 DisplayMetrics displaymetrics = new DisplayMetrics();
@@ -106,34 +104,46 @@ public class DashBoardFragment extends Fragment {
                 holder.postTitle.setText(model.getProductTitle());
                 holder.postDescription.setText("Rs"+ " "+model.getProductPrice());
                 Glide.with(getActivity().getApplicationContext()).load(model.getProductImageUrl()).into(holder.postImage);
+
+                if (model.isAddedToCart()){
+                    holder.mAddToCartBtn.setVisibility(View.GONE);
+                    holder.cardView.setVisibility(View.GONE);
+                    holder.AddedItem.setVisibility(View.VISIBLE);
+                }else {
+                    holder.mAddToCartBtn.setVisibility(View.VISIBLE);
+                    holder.cardView.setVisibility(View.VISIBLE);
+                    holder.AddedItem.setVisibility(View.GONE);
+                }
+
+
                 holder.mAddToCartBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        holder.mItemCountLin.setVisibility(View.VISIBLE);
+                        CartListProducts cartListProducts = CartListProducts.getInstance();
+                        model.setAddedToCart(true);
+                        model.setproductQuantity(1);
+                        cartListProducts.addCartItem(model);
                         holder.mAddToCartBtn.setVisibility(View.GONE);
-                    }
-                });
-                holder.mPlusBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        count=holder.mTotalCount.getText().toString();
-                        countInt=Integer.parseInt(count);
-                        incrementalCount=countInt++;
+                        holder.cardView.setVisibility(View.GONE);
+                        holder.AddedItem.setVisibility(View.VISIBLE);
 
-                        holder.mTotalCount.setText(countInt+"");
                     }
                 });
 
-                holder.mMinusBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        count=holder.mTotalCount.getText().toString();
-                        countInt=Integer.parseInt(count);
-                        incrementalCount=countInt--;
 
-                        holder.mTotalCount.setText(countInt+"");
-                    }
-                });
+
+//                holder.mMinusBtn.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        count=holder.mTotalCount.getText().toString();
+//                        countInt=Integer.parseInt(count);
+//                        incrementalCount=countInt--;
+//
+//                        holder.mTotalCount.setText(countInt+"");
+//                    }
+//                });
+
+
             }
 
             @NonNull
@@ -155,11 +165,13 @@ public class DashBoardFragment extends Fragment {
     public static class ProductViewHolder extends  RecyclerView.ViewHolder{
 
 
-        ImageView postImage;
+        ImageView postImage, AddedItem;
         TextView postTitle;
         TextView postDescription;
         Button mAddToCartBtn;
         LinearLayout mItemCountLin;
+        Button btnOrderNow;
+        CardView cardView;
 
         ImageView mPlusBtn, mMinusBtn;
         TextView mTotalCount;
@@ -167,13 +179,12 @@ public class DashBoardFragment extends Fragment {
             super(itemView);
 
             postImage = (ImageView) itemView.findViewById(R.id.postImage);
-            postTitle = (TextView) itemView.findViewById(R.id.postTitle);
+            postTitle = (TextView) itemView.findViewById(R.id.dashPostTitle);
             postDescription = (TextView) itemView.findViewById(R.id.postDescription);
             mAddToCartBtn=itemView.findViewById(R.id.add_to_cart_btn);
-            mItemCountLin=itemView.findViewById(R.id.count_item_lin_ly);
-            mPlusBtn=itemView.findViewById(R.id.PlusBtn);
-            mMinusBtn=itemView.findViewById(R.id.MinusBtn);
-            mTotalCount=itemView.findViewById(R.id.totalCount);
+            cardView=itemView.findViewById(R.id.cardVBtn);
+            AddedItem = itemView.findViewById(R.id.tvAddedItem);
+
 
         }
     }

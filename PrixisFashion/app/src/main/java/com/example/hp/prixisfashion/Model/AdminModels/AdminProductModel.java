@@ -5,21 +5,32 @@ public class AdminProductModel {
     private String ProductTitle;
     private String ProductCategories;
     private String ProductPrice;
-    private String ProductKeywords;
+    private int ProductQuantity;
     private String ProductDetails;
+    private Boolean AddedToCart;
+
+    public boolean isAddedToCart() {
+        return AddedToCart;
+    }
+
+    public void setAddedToCart(boolean addedToCart) {
+        AddedToCart = addedToCart;
+    }
 
 
 
     private String ProductImageUrl;
 
 
-    public AdminProductModel(String productTitle, String productCategories, String productPrice, String productKeywords, String productDetails, String productImageUrl) {
+    public AdminProductModel(String productTitle, String productCategories, String productPrice, int productQuantity, String productDetails, String productImageUrl, boolean addedToCart) {
         ProductTitle = productTitle;
         ProductCategories = productCategories;
         ProductPrice = productPrice;
-        ProductKeywords = productKeywords;
+        ProductQuantity = productQuantity;
         ProductDetails = productDetails;
         ProductImageUrl= productImageUrl;
+        AddedToCart = addedToCart;
+
     }
 
     public AdminProductModel() {
@@ -55,12 +66,12 @@ public class AdminProductModel {
         ProductPrice = productPrice;
     }
 
-    public String getProductKeywords() {
-        return ProductKeywords;
+    public int getproductQuantity() {
+        return ProductQuantity;
     }
 
-    public void setProductKeywords(String productKeywords) {
-        ProductKeywords = productKeywords;
+    public void setproductQuantity(int productQuantity) {
+        ProductQuantity = productQuantity;
     }
 
     public String getProductDetails() {

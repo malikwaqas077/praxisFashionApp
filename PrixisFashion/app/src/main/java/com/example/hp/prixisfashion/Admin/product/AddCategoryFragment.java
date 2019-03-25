@@ -53,6 +53,7 @@ public class AddCategoryFragment extends Fragment {
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
 
+
     private AdminCategoryModel adminCategoryModel;
 
 
@@ -156,7 +157,7 @@ public class AddCategoryFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 kProgressHUD.dismiss();
-                Snackbar.make(view, "Product Added", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(view, "Catagory Added", Snackbar.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -165,6 +166,8 @@ public class AddCategoryFragment extends Fragment {
                 Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG).show();
             }
         });
+
+
     }
 
 }

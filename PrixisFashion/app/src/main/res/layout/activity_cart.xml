@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="7"
+    android:background="#30bebdbd"
+    tools:context=".CartActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:gravity="center_vertical"
+        android:weightSum="2"
+        android:layout_weight=".7">
+        <TextView
+            android:id="@+id/tvTotalCartItems"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Items in cart(2)"/>
+        <TextView
+            android:id="@+id/tvAddMoreCart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add more"
+            android:gravity="end"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerCart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#43000000"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#FFF"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:layout_weight="1.7">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:text="Sub Total"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvSubTotalCart"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textColor="#000"
+                android:textAlignment="textEnd"
+                android:text="Rs: 630.0/-"
+                android:layout_height="wrap_content"
+                android:gravity="end" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:text="Service fee (4%)"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvServiceFeeCart"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textColor="#000"
+                android:textAlignment="textEnd"
+                android:text="Rs: 39.0/-"
+                android:layout_height="wrap_content"
+                android:gravity="end" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:text="Delivery Charges"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvDeliveryChargesCart"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textColor="#000"
+                android:textAlignment="textEnd"
+                android:text="Rs: 45.0/-"
+                android:layout_height="wrap_content"
+                android:gravity="end" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/gradiant_bg"
+        android:orientation="horizontal"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:weightSum="6"
+        android:layout_weight=".6">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:textSize="18sp"
+            android:textColor="#FFF"
+            android:layout_gravity="center"
+            android:text="Proceed to Checkout"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/totalAmountCart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.7"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:layout_gravity="center"
+            android:text="Pay Rs: 1044/-"/>
+        <ImageButton
+            android:id="@+id/btnGoConfirmOrder"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_chevron_right_24dp"
+            android:background="@null"
+            android:layout_weight=".5"/>
+    </LinearLayout>
+
+</LinearLayout>

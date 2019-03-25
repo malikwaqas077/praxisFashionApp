@@ -371,9 +371,7 @@ public class admin_home extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
         if(id == R.id.menu_btn_logout){
             auth.signOut();
             Snackbar snackbar=Snackbar.make(getWindow().getDecorView().getRootView(), "Logged Out", Snackbar.LENGTH_INDEFINITE);

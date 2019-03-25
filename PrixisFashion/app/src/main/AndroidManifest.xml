@@ -11,21 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PaymentActivity"></activity>
+        <activity android:name=".ConfirmOrderActivity" />
+        <activity android:name=".CartActivity" />
         <activity
             android:name=".Cusmoter.CustomerNavDrawerActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
+            android:theme="@style/AppTheme.NoActionBar" >
 
         </activity>
         <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignupActivity" />
@@ -37,9 +40,12 @@
         <activity
             android:name=".Admin.admin_home"
             android:label="@string/title_activity_admin_home"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
+
+
 
         </activity>
+
     </application>
 
 </manifest>
