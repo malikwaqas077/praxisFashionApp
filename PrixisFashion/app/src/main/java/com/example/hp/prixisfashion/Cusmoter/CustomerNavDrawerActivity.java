@@ -1,13 +1,14 @@
 package com.example.hp.prixisfashion.Cusmoter;
 
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.RecyclerView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,79 +19,39 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-import android.widget.ViewFlipper;
 
 import com.example.hp.prixisfashion.CartActivity;
-import com.example.hp.prixisfashion.Adapters.productAdapter;
 import com.example.hp.prixisfashion.Cusmoter.Fragments.CustomerCatagoriesFragment;
 import com.example.hp.prixisfashion.Cusmoter.Fragments.CustomerSignupFragment;
 import com.example.hp.prixisfashion.Cusmoter.Fragments.DashBoardFragment;
-import com.example.hp.prixisfashion.Cusmoter.Fragments.MyCartFragment;
 import com.example.hp.prixisfashion.Cusmoter.Fragments.MyOrdersFragment;
 import com.example.hp.prixisfashion.Cusmoter.Fragments.MyProfileFragment;
 import com.example.hp.prixisfashion.Cusmoter.Fragments.SigninFragment;
 import com.example.hp.prixisfashion.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 
-import java.util.ArrayList;
 
 public class CustomerNavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FirebaseAuth auth;
 
-    int images[] = {R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
-    private ViewFlipper simpleViewFlipper;
-    private ArrayList<String> mCategories = new ArrayList<>();
-
-
-    DatabaseReference ProductReference;
-    productAdapter mProductAdapter;
-    RecyclerView mProductRecycVw;
-
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_nav_drawer);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         auth = FirebaseAuth.getInstance();
 
-//        ProductReference= FirebaseDatabase.getInstance().getReference().child("Products");
-//
-//
-//        simpleViewFlipper = (ViewFlipper) findViewById(R.id.simpleViewFlipper); // get the reference of ViewFlipper
-//        mProductRecycVw=findViewById(R.id.main_recycler_vw);
-////        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-//
-//        mProductRecycVw.setLayoutManager(mLayoutManager);        // loop for creating ImageView's
-//        for (int i = 0; i < images.length; i++) {
-//            // create the object of ImageView
-//            ImageView imageView = new ImageView(this);
-//            imageView.setImageResource(images[i]); // set image in ImageView
-//            simpleViewFlipper.addView(imageView); // add the created ImageView in ViewFlipper
-//        }
-//        // Declare in and out animations and load them using AnimationUtils class
-//        Animation in = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
-//        Animation out = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
-//        // set the animation type's to ViewFlipper
-//        simpleViewFlipper.setInAnimation(in);
-//        simpleViewFlipper.setOutAnimation(out);
-//        // set interval time for flipping between views
-//        simpleViewFlipper.setFlipInterval(3000);
-//        // set auto start for flipping between views
-//        simpleViewFlipper.setAutoStart(true);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         DashBoardFragment fragment = new DashBoardFragment();
@@ -101,11 +62,22 @@ public class CustomerNavDrawerActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            new AlertDialog.Builder(this)
+                    .setMessage("Are you sure you want to exit?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                finishAndRemoveTask();
+                            }
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
         }
     }
 
@@ -127,7 +99,7 @@ public class CustomerNavDrawerActivity extends AppCompatActivity
         if (id == R.id.action_logout) {
             auth.signOut();
             FragmentLoadinManagerWithBackStack(new DashBoardFragment());
-            Snackbar snackbar = Snackbar.make(getWindow().getDecorView().getRootView(), "Logged Out", Snackbar.LENGTH_INDEFINITE);
+            Snackbar snackbar = Snackbar.make(getWindow().getDecorView().getRootView(), "Logged Out", Snackbar.LENGTH_SHORT);
             snackbar.show();
             return true;
         } else if (id == R.id.optCart) {
@@ -219,26 +191,30 @@ public class CustomerNavDrawerActivity extends AppCompatActivity
         } else if (id == R.id.nav_signin) {
 
             if (null != auth.getCurrentUser()) {
+                Toast.makeText(getApplicationContext(), "you already are signed in", Toast.LENGTH_SHORT).show();
+
+
+            } else {
                 SigninFragment signinFragment = new SigninFragment();
                 FragmentLoadinManagerWithBackStack(signinFragment);
-            } else {
-                Toast.makeText(getApplicationContext(), "you already are signed in", Toast.LENGTH_SHORT).show();
             }
 
 
         } else if (id == R.id.nav_signup) {
 
             if (null != auth.getCurrentUser()) {
-                FragmentLoadinManagerWithBackStack(new CustomerSignupFragment());
-            } else {
                 Toast.makeText(getApplicationContext(), "Please Logout first to signup", Toast.LENGTH_SHORT).show();
+
+            } else {
+                FragmentLoadinManagerWithBackStack(new CustomerSignupFragment());
+
             }
 
 
         }
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

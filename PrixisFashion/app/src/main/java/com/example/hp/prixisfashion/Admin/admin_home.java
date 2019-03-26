@@ -4,12 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.CardView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -48,8 +47,8 @@ public class admin_home extends AppCompatActivity
     FirebaseAuth auth;
 
 
-    FrameLayout HomeDBordMenu, OrderMenu, ProductMenu, CategoriesMenu, CustomerMenu,
-            AdminMenu, ContactMenu;
+    FrameLayout  OrderMenu, ProductMenu, CategoriesMenu, CustomerMenu,
+            AdminMenu;
     LinearLayout DashboardSubMenu, OrderSubMenu, ProductSubMenu, CategoriesSubMenu,  CustomerSubMenu,
              TransprtSubMenu, AdminSubMenu;
 
@@ -70,13 +69,13 @@ public class admin_home extends AppCompatActivity
 
         auth=FirebaseAuth.getInstance();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
         FragmentLoadinManagerWithBackStack(new AdminDashFragment());
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -91,6 +90,8 @@ public class admin_home extends AppCompatActivity
         DashboardSubMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CloseTheDrawer();
+
                 FragmentLoadinManagerWithBackStack(new AdminDashFragment());
             }
         });
@@ -109,7 +110,7 @@ public class admin_home extends AppCompatActivity
 
         // open fragment on submenu
 
-        NavSubmneuNewOrder = (TextView) headerLayout.findViewById(R.id.new_order_sub_tv);
+        NavSubmneuNewOrder =  headerLayout.findViewById(R.id.new_order_sub_tv);
         NavSubmneuNewOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,7 +125,7 @@ public class admin_home extends AppCompatActivity
 
         // opening inprogress fragment
 
-        NavSubmneuInProSubMenu = (TextView) headerLayout.findViewById(R.id.inprogress_sub_tv);
+        NavSubmneuInProSubMenu =  headerLayout.findViewById(R.id.inprogress_sub_tv);
         NavSubmneuInProSubMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,18 +140,7 @@ public class admin_home extends AppCompatActivity
 
         // open shipped fragment
 
-        NavSubmneuShippedSubMenu = (TextView) headerLayout.findViewById(R.id.shipped_sub_tv);
-        NavSubmneuShippedSubMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                if drawer is opened then Close it
-                CloseTheDrawer();
-                ShippedOrdersFragment shippedOrdersFragment = new ShippedOrdersFragment();
-                FragmentLoadinManagerWithBackStack(shippedOrdersFragment);
 
-
-            }
-        });
 
 
         // product catagoris
@@ -168,7 +158,7 @@ public class admin_home extends AppCompatActivity
 
         // open fragment on submenu add product
 
-        NavSubMenuAddProduct = (TextView) headerLayout.findViewById(R.id.add_pro_sub_tv);
+        NavSubMenuAddProduct =  headerLayout.findViewById(R.id.add_pro_sub_tv);
         NavSubMenuAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -183,7 +173,7 @@ public class admin_home extends AppCompatActivity
 
         // opening view product fragment
 
-        NavSubMenuViewProducts = (TextView) headerLayout.findViewById(R.id.viw_pro_sub_tv);
+        NavSubMenuViewProducts =  headerLayout.findViewById(R.id.viw_pro_sub_tv);
         NavSubMenuViewProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,25 +188,14 @@ public class admin_home extends AppCompatActivity
 
         // open shipped fragment
 
-        NavSubmneuShippedSubMenu = (TextView) headerLayout.findViewById(R.id.shipped_sub_tv);
-        NavSubmneuShippedSubMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                if drawer is opened then Close it
-                CloseTheDrawer();
-                ShippedOrdersFragment shippedOrdersFragment = new ShippedOrdersFragment();
-                FragmentLoadinManagerWithBackStack(shippedOrdersFragment);
 
-
-            }
-        });
 
 
 
                 // categories menu
 
-        CategoriesMenu = (FrameLayout) headerLayout.findViewById(R.id.categories_menu);
-        CategoriesSubMenu = (LinearLayout) headerLayout.findViewById(R.id.categories_sub_menu);
+        CategoriesMenu = headerLayout.findViewById(R.id.categories_menu);
+        CategoriesSubMenu =  headerLayout.findViewById(R.id.categories_sub_menu);
         CategoriesMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -227,7 +206,7 @@ public class admin_home extends AppCompatActivity
 
 
 
-        NavSubMenuAddCategoty = (TextView) headerLayout.findViewById(R.id.add_cat_sub_tv);
+        NavSubMenuAddCategoty =  headerLayout.findViewById(R.id.add_cat_sub_tv);
         NavSubMenuAddCategoty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -240,7 +219,7 @@ public class admin_home extends AppCompatActivity
             }
         });
 
-        NavSubmMenuViewCategoty = (TextView) headerLayout.findViewById(R.id.view_cat_sub_tv);
+        NavSubmMenuViewCategoty =  headerLayout.findViewById(R.id.view_cat_sub_tv);
         NavSubmMenuViewCategoty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -255,8 +234,8 @@ public class admin_home extends AppCompatActivity
 
         // Customer Menu
 
-        CustomerMenu = (FrameLayout) headerLayout.findViewById(R.id.customer_menu);
-        CustomerSubMenu = (LinearLayout) headerLayout.findViewById(R.id.customer_sub_menu);
+        CustomerMenu =  headerLayout.findViewById(R.id.customer_menu);
+        CustomerSubMenu =  headerLayout.findViewById(R.id.customer_sub_menu);
         CustomerMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -267,7 +246,7 @@ public class admin_home extends AppCompatActivity
         });
 
 
-        NavSubMenuViewCustomer = (TextView) headerLayout.findViewById(R.id.view_customer_sub_tv);
+        NavSubMenuViewCustomer =  headerLayout.findViewById(R.id.view_customer_sub_tv);
         NavSubMenuViewCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -283,8 +262,8 @@ public class admin_home extends AppCompatActivity
 
 
 
-        AdminMenu = (FrameLayout) headerLayout.findViewById(R.id.admin_menu);
-        AdminSubMenu = (LinearLayout) headerLayout.findViewById(R.id.admin_subMenu);
+        AdminMenu = headerLayout.findViewById(R.id.admin_menu);
+        AdminSubMenu = headerLayout.findViewById(R.id.admin_subMenu);
         AdminMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -296,7 +275,7 @@ public class admin_home extends AppCompatActivity
             }
         });
         
-        NavSubmAddAdmin = (TextView) headerLayout.findViewById(R.id.add_Admin_sub_tv);
+        NavSubmAddAdmin =  headerLayout.findViewById(R.id.add_Admin_sub_tv);
         NavSubmAddAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -307,7 +286,7 @@ public class admin_home extends AppCompatActivity
             }
         });
 
-        NavSubViewAdmin = (TextView) headerLayout.findViewById(R.id.view_admin_sub_tv);
+        NavSubViewAdmin =  headerLayout.findViewById(R.id.view_admin_sub_tv);
         NavSubViewAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -319,16 +298,7 @@ public class admin_home extends AppCompatActivity
         });
 
 
-        ContactMenu = (FrameLayout) headerLayout.findViewById(R.id.contact_us_menu);
-        ContactMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CloseTheDrawer();
-                ContactUsFragment contactUsFragment = new ContactUsFragment();
-                FragmentLoadinManagerWithBackStack(contactUsFragment);
 
-            }
-        });
 
 
 
@@ -336,7 +306,7 @@ public class admin_home extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -391,7 +361,7 @@ public class admin_home extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -409,7 +379,7 @@ public class admin_home extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -449,14 +419,7 @@ public class admin_home extends AppCompatActivity
                 CategoriesSubMenu.setVisibility(View.GONE);
                 CustomerSubMenu.setVisibility(View.GONE);
                 break;
-            case R.id.contact_us_menu:
-                OrderSubMenu.setVisibility(View.GONE);
-                ProductSubMenu.setVisibility(View.GONE);
-                CategoriesSubMenu.setVisibility(View.GONE);
-                CustomerSubMenu.setVisibility(View.GONE);
-                TransprtSubMenu.setVisibility(View.GONE);
-                AdminSubMenu.setVisibility(View.GONE);
-                break;
+
             default:
                 OrderSubMenu.setVisibility(View.GONE);
                 ProductSubMenu.setVisibility(View.GONE);
@@ -471,11 +434,10 @@ public class admin_home extends AppCompatActivity
 
 
     public void CloseTheDrawer() {
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer =  findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else
-            return;
+        }
     }
 
     public void FragmentLoadinManagerWithBackStack(Fragment fragment) {

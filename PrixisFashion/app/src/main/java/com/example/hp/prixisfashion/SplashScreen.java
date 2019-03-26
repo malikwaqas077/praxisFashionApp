@@ -13,19 +13,25 @@ import android.widget.ImageView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.example.hp.prixisfashion.Admin.admin_home;
 import com.example.hp.prixisfashion.Cusmoter.CustomerNavDrawerActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 import me.wangyuwei.particleview.ParticleView;
 
 public class SplashScreen extends AppCompatActivity {
     ParticleView particleView;
     ImageView image;
+    FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         particleView=findViewById(R.id.particleView);
         image=(ImageView)findViewById(R.id.image);
+        auth = FirebaseAuth.getInstance();
+
 //        final Boolean session=getSharedPreferences("PREFERENCE",MODE_PRIVATE).getBoolean("session",false);
 
         YoYo.with(Techniques.BounceIn).duration(8000).withListener(new Animator.AnimatorListener() {
@@ -58,8 +64,14 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
 
-                startActivity(new Intent(SplashScreen.this, CustomerNavDrawerActivity.class));
-                finish();
+                if (null != auth.getCurrentUser()) {
+                    startActivity(new Intent(SplashScreen.this, admin_home.class));
+                    finish();
+                } else {
+                    startActivity(new Intent(SplashScreen.this, LoginActivity.class));
+
+                }
+
             }
 
         },8000);

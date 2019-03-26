@@ -87,7 +87,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             btnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "Add button called", Toast.LENGTH_SHORT).show();
                     quantity=quantity+1;
                     tvQuantity.setText(String.valueOf(quantity));
                     model.setproductQuantity(quantity);

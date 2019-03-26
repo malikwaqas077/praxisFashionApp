@@ -88,11 +88,12 @@
                     >
 
                     <EditText
+
                         android:id="@+id/et_prod_keywords"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Product Keywords"
-                        android:inputType="textAutoComplete"
+                        android:hint="Product Quantity"
+                        android:inputType="number"
                         />
 
                 </android.support.design.widget.TextInputLayout>

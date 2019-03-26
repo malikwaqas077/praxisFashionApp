@@ -134,9 +134,7 @@ public class MyProfileFragment extends Fragment {
 
 
                     edName.setText(id);
-                    Toast.makeText(getActivity(), id, Toast.LENGTH_SHORT).show();
                     mEmail.setText(time);
-                    Toast.makeText(getActivity(), time, Toast.LENGTH_SHORT).show();
 
                     mPhoneTv.setText(address);
                     Glide.with(getContext()).load(price).into(userProfileImage);

@@ -34,7 +34,7 @@ public class CatagoriesFragment extends Fragment {
 
     private ListView mLstVwCategories;
 
-    private ArrayList<String> mCategories=new ArrayList<>();
+    private ArrayList<String> mCategories;
     private ArrayList<String> mCatIds = new ArrayList<>();
 
     private ArrayAdapter<String> arrayAdapter;

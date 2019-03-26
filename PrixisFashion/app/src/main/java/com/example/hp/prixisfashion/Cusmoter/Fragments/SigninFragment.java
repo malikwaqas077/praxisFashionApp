@@ -119,6 +119,10 @@ public class SigninFragment extends Fragment {
                                 FragmentLoadinManagerWithBackStack(new DashBoardFragment());
                                 Snackbar.make(view, "user loggedin successfully", Snackbar.LENGTH_LONG).show();
                                 kProgressHUD.dismiss();
+                            } else{
+                                kProgressHUD.dismiss();
+                                Snackbar.make(view, "Login Credientails aren't correct", Snackbar.LENGTH_LONG).show();
+
                             }
                         }
                     });

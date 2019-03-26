@@ -31,15 +31,12 @@ import java.util.List;
  */
 public class MyOrdersFragment extends Fragment {
 
-    private ListView mLstVwCategories;
 
     private ArrayList<String> mOrderDate=new ArrayList<>();
 
 
-    private ArrayAdapter<String> arrayAdapter;
 
-    private FirebaseDatabase firebaseDatabase;
-    DatabaseReference ProductReference;
+    DatabaseReference OrderReference;
 
     RecyclerView recyclerViewOrders;
     private OrderAdapter adapter;
@@ -56,7 +53,7 @@ public class MyOrdersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_orders, container, false);
-        ProductReference= FirebaseDatabase.getInstance().getReference().child("Order");
+        OrderReference= FirebaseDatabase.getInstance().getReference().child("Order");
         getActivity().setTitle("My Orders");
 
         recyclerViewOrders = view.findViewById(R.id.recOrders);
@@ -74,7 +71,7 @@ public class MyOrdersFragment extends Fragment {
 
     private ArrayList<String> getOrders(){
         mOrderDate=new ArrayList<>();
-        ProductReference.addValueEventListener(new ValueEventListener() {
+        OrderReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> categoriesList=dataSnapshot.getChildren();

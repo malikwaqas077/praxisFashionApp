@@ -106,7 +106,7 @@ public class ProductsFragment extends Fragment {
                     adminProductModel=products.getValue(AdminProductModel.class);
                     mProducts.add(adminProductModel.getProductTitle());
 
-                    arrayAdapter=new ArrayAdapter(getContext(), R.layout.list_item_design, R.id.list_item_txt_vw, mProducts);
+                    arrayAdapter=new ArrayAdapter(getActivity(), R.layout.list_item_design, R.id.list_item_txt_vw, mProducts);
 //                    arrayAdapter=new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, mProducts);
                     mLstVwProducts.setAdapter(arrayAdapter);
                 }

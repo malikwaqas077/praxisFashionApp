@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/fab_margin"
-            android:fontFamily="@font/bree_serif"
+            android:fontFamily="@font/comfortaa_light"
             android:text="item 1"
             android:textSize="18dp" />
     </android.support.v7.widget.CardView>

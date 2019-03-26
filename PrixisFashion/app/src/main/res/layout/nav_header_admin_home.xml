@@ -104,22 +104,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/navigationDrawersubMenuGap"
-            android:text="In Progress Orders"
+            android:text="Shipped Order"
             android:clickable="true"
             android:id="@+id/inprogress_sub_tv"
             android:textColor="@color/selectorColor"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Shipped Order"
-            android:textColor="@color/selectorColor"
-            android:id="@+id/shipped_sub_tv"
-            android:textSize="16sp"
-            android:layout_margin="@dimen/navigationDrawersubMenuGap"
-            android:textStyle="bold" />
+
     </LinearLayout>
 
     <FrameLayout
@@ -370,36 +362,5 @@
 
 
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:id="@+id/contact_us_menu"
-        android:background="@drawable/navigation_drawer_color"
-        android:elevation="10dp"
-        android:padding="@dimen/activity_horizontal_margin">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="6dp"
-                android:layout_marginEnd="6dp"
-                android:src="@drawable/accountssmall"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Accounts"
-                android:textColor="@color/textColor"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </FrameLayout>
 
 </LinearLayout>

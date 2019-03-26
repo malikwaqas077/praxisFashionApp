@@ -178,10 +178,12 @@ public class AddProductFragment extends Fragment {
                 for (DataSnapshot students : studentNameList) {
                     adminCategoryModel = students.getValue(AdminCategoryModel.class);
                     mCategories.add(adminCategoryModel.getCategoryTitle());
-                    ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, mCategories);
-                    arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    mSpinnerCategories.setAdapter(arrayAdapter);
+
+
                 }
+                ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, mCategories);
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mSpinnerCategories.setAdapter(arrayAdapter);
             }
 
             @Override

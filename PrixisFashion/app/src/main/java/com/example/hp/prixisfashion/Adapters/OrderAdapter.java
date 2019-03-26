@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,10 +31,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
         this.context = context;
     }
 
+    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
+
     @NonNull
     @Override
     public OrderItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.orders_list_item,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.orders_list_item, viewGroup, false);
+
+        view.setOnClickListener(mOnClickListener);
+
         OrderItemViewHolder viewHolder = new OrderItemViewHolder(view);
         return viewHolder;
     }
@@ -47,57 +59,56 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
         return modelList.size();
     }
 
-    public class OrderItemViewHolder extends RecyclerView.ViewHolder{
-        TextView tvDate,tvTime,tvItemsOrder,tvStatus,tvTotalAmount,tvPayMethod;
+    public class OrderItemViewHolder extends RecyclerView.ViewHolder {
+        TextView tvDate, tvTime, tvItemsOrder, tvStatus, tvTotalAmount, tvPayMethod;
+        ImageView check;
+
         public OrderItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvDate=itemView.findViewById(R.id.tvDateMonthOrder);
-            tvTime=itemView.findViewById(R.id.tvTimeOrder);
-            tvItemsOrder=itemView.findViewById(R.id.tvTotalItemsOrder);
-            tvStatus=itemView.findViewById(R.id.tvOrderStatusOrder);
-            tvTotalAmount=itemView.findViewById(R.id.tvTotalAmountOrder);
-            tvPayMethod=itemView.findViewById(R.id.tvPaymentMethodOrder);
+            tvDate = itemView.findViewById(R.id.tvDateMonthOrder);
+            tvTime = itemView.findViewById(R.id.tvTimeOrder);
+            tvItemsOrder = itemView.findViewById(R.id.tvTotalItemsOrder);
+            tvStatus = itemView.findViewById(R.id.tvOrderStatusOrder);
+            tvTotalAmount = itemView.findViewById(R.id.tvTotalAmountOrder);
         }
 
-        void bind(OrderModel model){
+        void bind(OrderModel model) {
             setDateAndTime(model.getDateTimeOrder());
 
             String[] items = getArrayFromString(model.getOrderedProductIds());
-            String itemsOrder =String.valueOf(items.length)+" items ordered";
+            String itemsOrder = String.valueOf(items.length) + " items ordered";
             tvItemsOrder.setText(itemsOrder);
 
             tvStatus.setText(model.getOrderStatus());
-            String totalAmount = "Rs: "+model.getTotalPrice()+".0/-";
+            String totalAmount = "Rs: " + model.getTotalPrice() + ".0/-";
             tvTotalAmount.setText(totalAmount);
-            tvPayMethod.setText(model.getPaymentMethod());
 
         }
 
         private String[] getArrayFromString(String orderedProductIds) {
-            String[] productsIds =orderedProductIds.split(" ");
+            String[] productsIds = orderedProductIds.split(" ");
 
             return productsIds;
         }
 
 
         private void setDateAndTime(String dateTimeOrder) {
-            SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
 
             try {
                 Date date = dateFormat.parse(dateTimeOrder);
-                Calendar calendar=Calendar.getInstance();
+                Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
 
                 String dd = String.valueOf(calendar.get(Calendar.DATE));
                 // Toast.makeText(context, "Date is: "+String.valueOf(dd), Toast.LENGTH_SHORT).show();
                 String month = getMonthForInt(calendar.get(Calendar.MONTH));
-                String dateMonth = dd+" "+month;
+                String dateMonth = dd + " " + month;
                 tvDate.setText(dateMonth);
 
-                SimpleDateFormat timeFormat =new SimpleDateFormat("hh:mm a");
+                SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
                 String time = timeFormat.format(date);
                 tvTime.setText(time);
-
 
 
             } catch (ParseException e) {
@@ -110,10 +121,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
             String month = "wrong";
             DateFormatSymbols dfs = new DateFormatSymbols();
             String[] months = dfs.getMonths();
-            if (num >= 0 && num <= 11 ) {
+            if (num >= 0 && num <= 11) {
                 month = months[num];
             }
-            return month.toUpperCase().substring(0,3);
+            return month.toUpperCase().substring(0, 3);
         }
 
     }

@@ -103,7 +103,7 @@ public class AddCategoryFragment extends Fragment {
                     kProgressHUD= KProgressHUD.create(getContext())
                             .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                             .setAnimationSpeed(2)
-                            .setBackgroundColor(getResources().getColor(R.color.design_default_color_primary))
+                            .setBackgroundColor(getResources().getColor(R.color.colorAccent))
                             .setLabel("Adding")
                             .setDetailsLabel("Please Wait...")
                             .setDimAmount(0.3f)
